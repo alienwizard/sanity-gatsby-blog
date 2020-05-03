@@ -2,7 +2,10 @@ import {format, isFuture} from 'date-fns'
 import sanityClient from '@sanity/client'
 import clientConfig from '../../client-config'
 
-const {projectId, dataset} = clientConfig
+const {
+  sanity: {projectId, dataset}
+} = clientConfig
+
 const client = sanityClient({
   projectId,
   dataset,
