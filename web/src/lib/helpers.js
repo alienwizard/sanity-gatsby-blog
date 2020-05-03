@@ -1,5 +1,14 @@
 import {format, isFuture} from 'date-fns'
 import sanityClient from '@sanity/client'
+import clientConfig from '../../client-config'
+
+const {projectId, dataset} = clientConfig
+const client = sanityClient({
+  projectId,
+  dataset,
+  useCdn: false,
+  withCredentials: true
+})
 
 export function cn (...args) {
   return args.filter(Boolean).join(' ')
@@ -47,13 +56,29 @@ export function toPlainText (blocks) {
     .join('\n\n')
 }
 
-export function fetchDataFromSanity () {}
+/*
+export function fetchDataFromSanity () {
+  const query = '*[_type == "bike" && seats >= $minSeats] {name, pages}'
+  const params = {pages: 2}
 
-export function subscribeToData (id, fetchFn) {
-  const clientForPreview = sanityClient({
-    projectId: '<your projectId>',
-    dataset: '<your dataset>',
-    useCdn: false,
-    withCredentials: true
+  client.fetch(query, params).then(bikes => {
+    console.log('Bikes with more than one seat:')
+    bikes.forEach(bike => {
+      console.log(`${bike.name} (${bike.seats} seats)`)
+    })
   })
+}
+*/
+
+export function subscribeToBlogUpdates (id, updateState) {
+  const query = '*[_type == "post" && id != $id]'
+  const params = {id}
+
+  const subscription = client.listen(query, params).subscribe(update => {
+    const comment = update.result
+    console.log(`${comment.author} commented: ${comment.text}`)
+  })
+
+  // to unsubscribe later on
+  return () => subscription.unsubscribe()
 }
