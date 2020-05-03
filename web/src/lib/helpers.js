@@ -1,4 +1,5 @@
 import {format, isFuture} from 'date-fns'
+import sanityClient from '@sanity/client'
 
 export function cn (...args) {
   return args.filter(Boolean).join(' ')
@@ -44,4 +45,15 @@ export function toPlainText (blocks) {
       return block.children.map(child => child.text).join('')
     })
     .join('\n\n')
+}
+
+export function fetchDataFromSanity () {}
+
+export function subscribeToData (id, fetchFn) {
+  const clientForPreview = sanityClient({
+    projectId: '<your projectId>',
+    dataset: '<your dataset>',
+    useCdn: false,
+    withCredentials: true
+  })
 }
