@@ -10,5 +10,5 @@ export default function resolveProductionUrl(document) {
 
   console.log('current', slug.current)
 
-  return `https://build-fcf745d5-fabf-4912-b707-b0cf55a05a47.gtsb.io/${blogPath}`
+  return `https://sanity-gatsby-blog-4633351568.gtsb.io${blogPath}`
 }
