@@ -14,6 +14,9 @@
   "devDependencies": {
     "@sanity/block-content-to-react": "^2.0.7",
     "@sanity/image-url": "^0.140.18",
+    "@types/node": "^14.6.0",
+    "@types/react": "^16.9.46",
+    "@types/react-dom": "^16.9.8",
     "date-fns": "^1.30.1",
     "dotenv": "^8.0.0",
     "eslint": "^5.16.0",

@@ -1,6 +1,5 @@
 /* eslint-disable react/no-multi-comp, react/no-did-mount-set-state */
 import React from 'react'
-import PropTypes from 'prop-types'
 import {format} from 'date-fns'
 import styles from './IframePreview.module.css'
 
@@ -50,10 +49,6 @@ const IframePreview = props => {
       </div>
     </div>
   )
-}
-
-IframePreview.propTypes = {
-  document: PropTypes.object // eslint-disable-line react/forbid-prop-types
 }
 
 IframePreview.defaultProps = {
