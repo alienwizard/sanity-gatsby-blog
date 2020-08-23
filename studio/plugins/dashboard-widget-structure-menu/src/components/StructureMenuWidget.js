@@ -4,13 +4,13 @@ import FileIcon from 'part:@sanity/base/file-icon'
 import React from 'react'
 import styles from './StructureMenuWidget.css'
 
-function getIconComponent (item) {
+function getIconComponent(item) {
   if (item.icon) return item.icon
   if (!item.schemaType) return FileIcon
   return item.schemaType.icon || FolderIcon
 }
 
-function StructureMenuWidget (props) {
+function StructureMenuWidget(props) {
   return (
     <div className={styles.root}>
       <div className={styles.header}>
