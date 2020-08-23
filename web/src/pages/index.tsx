@@ -10,6 +10,7 @@ import Container from '../components/container'
 import GraphQLErrorList from '../components/graphql-error-list'
 import SEO from '../components/seo'
 import Layout from '../containers/layout'
+import PatternPreviewList from '../components/pattern/pattern-preview-list'
 
 export const query = graphql`
   fragment SanityImage on SanityMainImage {
@@ -31,29 +32,34 @@ export const query = graphql`
     }
     asset {
       _id
+      source {
+        url
+      }
     }
   }
 
   query IndexPageQuery {
-    site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
+    site: sanitySiteSettings(_id: {regex: "/(drafts.|)siteSettings/"}) {
       title
       description
       keywords
     }
-    posts: allSanityPost(
+    patterns: allSanityPattern(
       limit: 6
-      sort: { fields: [publishedAt], order: DESC }
-      filter: { slug: { current: { ne: null } }, publishedAt: { ne: null } }
+      sort: {fields: [publishedAt], order: DESC}
+      filter: {slug: {current: {ne: null}}, publishedAt: {ne: null}}
     ) {
       edges {
         node {
           id
           publishedAt
+          title
           mainImage {
-            ...SanityImage
+            asset {
+              url
+            }
             alt
           }
-          title
           _rawExcerpt
           slug {
             current
@@ -76,11 +82,13 @@ const IndexPage = props => {
   }
 
   const site = (data || {}).site
-  const postNodes = (data || {}).posts
-    ? mapEdgesToNodes(data.posts)
-      .filter(filterOutDocsWithoutSlugs)
-      .filter(filterOutDocsPublishedInTheFuture)
+  const postNodes = (data || {}).patterns
+    ? mapEdgesToNodes(data.patterns)
+        .filter(filterOutDocsWithoutSlugs)
+        .filter(filterOutDocsPublishedInTheFuture)
     : []
+
+  console.log(postNodes)
 
   if (!site) {
     throw new Error(
@@ -90,20 +98,9 @@ const IndexPage = props => {
 
   return (
     <Layout>
-      <SEO
-        title={site.title}
-        description={site.description}
-        keywords={site.keywords}
-      />
+      <SEO title={site.title} description={site.description} keywords={site.keywords} />
       <Container>
-        <h1 hidden>Welcome to {site.title}</h1>
-        {postNodes && (
-          <BlogPostPreviewList
-            title='Latest blog posts'
-            nodes={postNodes}
-            browseMoreHref='/archive/'
-          />
-        )}
+        {postNodes && <PatternPreviewList nodes={postNodes} browseMoreHref="/patterns/" />}
       </Container>
     </Layout>
   )

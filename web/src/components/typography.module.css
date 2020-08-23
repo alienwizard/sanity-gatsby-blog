@@ -1,40 +1,50 @@
 @import '../styles/custom-media.css';
 @import '../styles/custom-properties.css';
-
-
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Script&display=swap');
 
 /*
  * Statically sized elements
  */
 
+.logo {
+  font-family: 'League Script';
+}
+
 .title1 {
   font-size: var(--font-title1-size);
   line-height: var(--font-title1-line-height);
+  font-family: 'Nanum Myeongjo', serif;
 }
 
 .title2 {
   font-size: var(--font-title2-size);
   line-height: var(--font-title2-line-height);
+  font-family: 'Nanum Myeongjo', serif;
 }
 
 .title3 {
   font-size: var(--font-title3-size);
   line-height: var(--font-title3-line-height);
+  font-family: 'Nanum Myeongjo', serif;
 }
 
 .large {
   font-size: var(--font-large-size);
   line-height: var(--font-large-line-height);
+  font-family: 'Nanum Myeongjo', serif;
 }
 
 .base {
   font-size: inherit;
   line-height: inherit;
+  font-family: 'Nanum Myeongjo', serif;
 }
 
 .small {
   font-size: var(--font-small-size);
   line-height: var(--font-small-line-height);
+  font-family: 'Nanum Myeongjo', serif;
 }
 
 .micro {
@@ -42,8 +52,6 @@
   line-height: var(--font-micro-line-height);
   text-transform: uppercase;
 }
-
-
 
 /*
  * Responsively sized elements

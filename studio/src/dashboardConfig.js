@@ -1,6 +1,6 @@
 export default {
   widgets: [
-    { name: 'structure-menu' },
+    {name: 'structure-menu'},
     {
       name: 'project-info',
       options: {
@@ -33,15 +33,19 @@ export default {
             value: 'https://github.com/alienwizard/sanity-gatsby-blog',
             category: 'Code'
           },
-          { title: 'Frontend', value: 'https://sanity-gatsby-blog-web-zsmygcks.netlify.com', category: 'apps' }
+          {
+            title: 'Frontend',
+            value: 'https://sanity-gatsby-blog-web-zsmygcks.netlify.com',
+            category: 'apps'
+          }
         ]
       }
     },
-    { name: 'project-users', layout: { height: 'auto' } },
+    {name: 'project-users', layout: {height: 'auto'}},
     {
       name: 'document-list',
-      options: { title: 'Recent blog posts', order: '_createdAt desc', types: ['post'] },
-      layout: { width: 'medium' }
+      options: {title: 'Recent pattern posts', order: '_createdAt desc', types: ['pattern']},
+      layout: {width: 'medium'}
     }
   ]
 }

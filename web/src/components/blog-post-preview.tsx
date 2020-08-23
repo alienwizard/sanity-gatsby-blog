@@ -8,7 +8,7 @@ import PortableText from './portableText'
 import styles from './blog-post-preview.module.css'
 import {responsiveTitle3} from './typography.module.css'
 
-function BlogPostPreview (props) {
+function BlogPostPreview(props) {
   return (
     <Link
       className={props.isInList ? styles.inList : styles.inGrid}
@@ -18,8 +18,8 @@ function BlogPostPreview (props) {
         {props.mainImage && props.mainImage.asset && (
           <img
             src={imageUrlFor(buildImageObj(props.mainImage))
-              .width(600)
-              .height(Math.floor((9 / 16) * 600))
+              .width(1200)
+              .height(Math.floor((9 / 16) * 900))
               .auto('format')
               .url()}
             alt={props.mainImage.alt}

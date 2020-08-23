@@ -1,25 +1,42 @@
 import {Link} from 'gatsby'
-import React from 'react'
+import React, {CSSProperties} from 'react'
 import Icon from './icon'
 import {cn} from '../lib/helpers'
 
 import styles from './header.module.css'
 
+const ulStyle: CSSProperties = {
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center'
+}
+
+const navStyle: CSSProperties = {
+  display: 'flex',
+  justifyContent: 'center',
+  width: '100%'
+}
+
 const Header = ({onHideNav, onShowNav, showNav, siteTitle}) => (
   <div className={styles.root}>
     <div className={styles.wrapper}>
-      <div className={styles.branding}>
-        <Link to='/'>{siteTitle}</Link>
-      </div>
-
       <button className={styles.toggleNavButton} onClick={showNav ? onHideNav : onShowNav}>
-        <Icon symbol='hamburger' />
+        <Icon symbol="hamburger" />
       </button>
 
-      <nav className={cn(styles.nav, showNav && styles.showNav)}>
-        <ul>
+      <nav style={navStyle} className={cn(styles.nav, showNav && styles.showNav)}>
+        <ul style={ulStyle}>
           <li>
-            <Link to='/archive/'>Archive</Link>
+            <Link to="/archive/">Home</Link>
+          </li>
+          <li>
+            <Link to="/patterns/">Patterns</Link>
+          </li>
+          <li>
+            <Link to="/about/">About</Link>
+          </li>
+          <li>
+            <Link to="/contact/">Contact</Link>
           </li>
         </ul>
       </nav>
