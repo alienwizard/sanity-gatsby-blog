@@ -10,7 +10,7 @@ const logoStyles: CSSProperties = {
 function Logo() {
   return (
     <div style={logoStyles} className={styles.logo}>
-      <h1>Clara knits</h1>
+      <h1 style={{margin: '10px 0 0 0'}}>Clara knits</h1>
     </div>
   )
 }
