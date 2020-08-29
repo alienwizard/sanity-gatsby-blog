@@ -31,6 +31,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-create-client-paths`,
       options: {prefixes: [`/preview/*`]}
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: 'fonts',
+        path: `${__dirname}/static/fonts/`
+      }
     }
   ]
 }

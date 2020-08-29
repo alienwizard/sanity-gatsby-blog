@@ -3,6 +3,7 @@ import Container from '../components/container'
 import GraphQLErrorList from '../components/graphql-error-list'
 import SEO from '../components/seo'
 import Layout from '../containers/layout'
+import {graphql} from 'gatsby'
 
 export const query = graphql`
   query AboutPageQuery {
@@ -11,6 +12,9 @@ export const query = graphql`
       description
       keywords
     }
+    sanityPage(slug: {current: {eq: "about"}}) {
+    _rawBody(resolveReferences: {maxDepth: 10})
+  }
   }
 `
 
@@ -25,7 +29,11 @@ export default function about(props) {
     )
   }
 
-  const site = (data || {}).site
+  const {site} = data
+  const {_rawBody} = (data || {}).sanityPage
+
+console.log(_rawBody);
+
 
   return (
     <Layout>
