@@ -12,6 +12,18 @@ export default {
       description: 'Titles should be catchy, descriptive, and not too long'
     },
     {
+      name: 'price',
+      type: 'string',
+      title: 'Pris',
+      description: 'The price of the pattern'
+    },
+    {
+      name: 'patternImages',
+      type: 'array',
+      title: 'Bildspel',
+      of: [{type: 'image'}]
+    },
+    {
       name: 'slug',
       type: 'slug',
       title: 'Slug',

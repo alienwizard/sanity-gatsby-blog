@@ -1,4 +1,6 @@
 import React from 'react'
+import {Link} from 'gatsby'
+import {getBlogUrl} from '../../lib/helpers'
 
 type PatternsProps = {nodes: any[]}
 
@@ -17,17 +19,20 @@ export default function Patterns({nodes}: PatternsProps) {
           mainImage: {
             asset: {url}
           },
+          publishedAt,
+          slug: {current},
           ...pattern
         }) => {
           console.log(pattern)
           const {title} = pattern
           return (
-            <a
+            <Link
               style={{
                 display: 'flex',
                 width: '100%',
                 cursor: 'pointer'
               }}
+              to={getBlogUrl(publishedAt, current)}
               key={title}
             >
               <div
@@ -54,7 +59,7 @@ export default function Patterns({nodes}: PatternsProps) {
                   <div>{title}</div>
                 </div>
               </div>
-            </a>
+            </Link>
           )
         }
       )}

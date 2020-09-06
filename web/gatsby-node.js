@@ -7,44 +7,7 @@ const {isFuture} = require('date-fns')
 
 const {format} = require('date-fns')
 
-async function createBlogPostPages (graphql, actions) {
-  const {createPage} = actions
-  const result = await graphql(`
-    {
-      allSanityPost(filter: {slug: {current: {ne: null}}, publishedAt: {ne: null}}) {
-        edges {
-          node {
-            id
-            publishedAt
-            slug {
-              current
-            }
-          }
-        }
-      }
-    }
-  `)
-
-  if (result.errors) throw result.errors
-
-  const postEdges = (result.data.allSanityPost || {}).edges || []
-
-  postEdges
-    .filter(edge => !isFuture(edge.node.publishedAt))
-    .forEach((edge, index) => {
-      const {id, slug = {}, publishedAt} = edge.node
-      const dateSegment = format(publishedAt, 'YYYY/MM')
-      const path = `/blog/${dateSegment}/${slug.current}/`
-
-      createPage({
-        path,
-        component: require.resolve('./src/templates/blog-post.tsx'),
-        context: {id}
-      })
-    })
-}
-
-async function createPatternPages (graphql, actions) {
+async function createPatternPages(graphql, actions) {
   const {createPage} = actions
   const result = await graphql(`
     {
@@ -62,26 +25,27 @@ async function createPatternPages (graphql, actions) {
     }
   `)
 
+  console.log('Create patternPAges')
   if (result.errors) throw result.errors
 
-  const postEdges = (result.data.allSanityPost || {}).edges || []
+  const postEdges = (result.data.allSanityPattern || {}).edges || []
 
   postEdges
-    .filter(edge => !isFuture(edge.node.publishedAt))
+    .filter((edge) => !isFuture(edge.node.publishedAt))
     .forEach((edge, index) => {
       const {id, slug = {}, publishedAt} = edge.node
       const dateSegment = format(publishedAt, 'YYYY/MM')
-      const path = `/blog/${dateSegment}/${slug.current}/`
+      const path = `/pattern/${dateSegment}/${slug.current}/`
 
+      console.log('createpage', path)
       createPage({
         path,
-        component: require.resolve('./src/templates/blog-post.js'),
+        component: require.resolve('./src/templates/pattern.tsx'),
         context: {id}
       })
     })
 }
 
 exports.createPages = async ({graphql, actions}) => {
-  await createBlogPostPages(graphql, actions)
   await createPatternPages(graphql, actions)
 }
