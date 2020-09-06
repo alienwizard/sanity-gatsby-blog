@@ -28,6 +28,11 @@ export const query = graphql`
           id
           publishedAt
           title
+          patternImages {
+            asset {
+              url
+            }
+          }
           mainImage {
             asset {
               url

@@ -30,6 +30,7 @@ export default function PatternPreviewList({nodes}: PatternPreviewList) {
 
           return (
             <div
+              key={url}
               style={{
                 margin: '10px',
                 width: '600px',

@@ -82,7 +82,11 @@ const PatternTemplate = (props: Props) => {
         </Container>
       )}
 
-      {pattern && <Pattern {...pattern} />}
+      {pattern && (
+        <Container>
+          <Pattern {...pattern} />
+        </Container>
+      )}
     </Layout>
   )
 }
