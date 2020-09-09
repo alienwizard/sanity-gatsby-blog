@@ -2,6 +2,7 @@ import React, {ReactElement} from 'react'
 import {imageUrlFor} from '../../lib/image-url'
 import {buildImageObj} from '../../lib/helpers'
 import Slideshow from '../gallery/slideshow'
+import PortableText from '../portableText'
 
 interface Props {
   _rawBody: any
@@ -40,7 +41,9 @@ export default function Pattern({
       </div>
       <div>
         <h2 style={{marginTop: 0}}>{title}</h2>
+        {_rawBody && <PortableText blocks={_rawBody} />}
       </div>
+      <div>{_rawBody && <PortableText blocks={_rawBody} />}</div>
     </article>
   )
 }
