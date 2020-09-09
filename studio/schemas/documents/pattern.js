@@ -3,7 +3,7 @@ import {format} from 'date-fns'
 export default {
   name: 'pattern',
   type: 'document',
-  title: 'Pattern',
+  title: 'Patterns',
   fields: [
     {
       name: 'title',
@@ -89,7 +89,12 @@ export default {
     {
       name: 'body',
       type: 'bodyPortableText',
-      title: 'Body'
+      title: 'Beskrivning'
+    },
+    {
+      name: 'details',
+      type: 'bodyPortableText',
+      title: 'Detaljer'
     }
   ],
   orderings: [
