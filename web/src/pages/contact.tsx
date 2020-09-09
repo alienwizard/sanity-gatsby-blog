@@ -3,6 +3,7 @@ import Container from '../components/container'
 import GraphQLErrorList from '../components/graphql-error-list'
 import SEO from '../components/seo'
 import Layout from '../containers/layout'
+import PortableText from '../components/portableText'
 
 export const query = graphql`
   query ContactPageQuery {
@@ -11,11 +12,14 @@ export const query = graphql`
       description
       keywords
     }
+    sanityPage(slug: {current: {eq: "contact"}}) {
+      _rawBody(resolveReferences: {maxDepth: 10})
+    }
   }
 `
 
 export default function contact(props) {
-  const {data, errors} = props
+  const {data, errors, _rawBody} = props
 
   if (errors) {
     return (
@@ -30,7 +34,9 @@ export default function contact(props) {
   return (
     <Layout>
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
-      <Container>contact</Container>
+      <Container>
+        <div>{_rawBody && <PortableText blocks={_rawBody} />}</div>
+      </Container>
     </Layout>
   )
 }
