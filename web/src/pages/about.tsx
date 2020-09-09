@@ -13,7 +13,7 @@ export const query = graphql`
       description
       keywords
     }
-    sanityPage(slug: {current: {eq: "about"}}) {
+    about: sanityPage(slug: {current: {eq: "about"}}) {
       _rawBody(resolveReferences: {maxDepth: 10})
     }
   }
@@ -31,15 +31,13 @@ export default function about(props) {
   }
 
   const {site} = data
-  const {_rawBody} = (data || {}).sanityPage
-
-  console.log(_rawBody)
+  const about = data && (data || {}).about
 
   return (
     <Layout>
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
       <Container>
-        <div>{_rawBody && <PortableText blocks={_rawBody} />}</div>
+        <div>{about?._rawBody && <PortableText blocks={about?._rawBody} />}</div>
       </Container>
     </Layout>
   )

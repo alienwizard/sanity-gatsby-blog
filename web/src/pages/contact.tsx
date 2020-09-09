@@ -4,6 +4,7 @@ import GraphQLErrorList from '../components/graphql-error-list'
 import SEO from '../components/seo'
 import Layout from '../containers/layout'
 import PortableText from '../components/portableText'
+import {graphql} from 'gatsby'
 
 export const query = graphql`
   query ContactPageQuery {
@@ -12,14 +13,16 @@ export const query = graphql`
       description
       keywords
     }
-    sanityPage(slug: {current: {eq: "contact"}}) {
-      _rawBody(resolveReferences: {maxDepth: 10})
+    contact: sanityPage(slug: {current: {eq: "contact"}}) {
+      _rawBody(resolveReferences: {maxDepth: 5})
     }
   }
 `
 
 export default function contact(props) {
-  const {data, errors, _rawBody} = props
+  console.log('contact', props)
+
+  const {data, errors} = props
 
   if (errors) {
     return (
@@ -30,12 +33,15 @@ export default function contact(props) {
   }
 
   const site = (data || {}).site
+  const contact = data && (data || {}).contact
+
+  console.log(contact)
 
   return (
     <Layout>
       <SEO title={site.title} description={site.description} keywords={site.keywords} />
       <Container>
-        <div>{_rawBody && <PortableText blocks={_rawBody} />}</div>
+        <div>{contact?._rawBody && <PortableText blocks={contact?._rawBody} />}</div>
       </Container>
     </Layout>
   )
