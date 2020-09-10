@@ -6,6 +6,7 @@ import PortableText from '../portableText'
 
 interface Props {
   _rawBody: any
+  _rawDetails: any
   authors: any
   categories: any
   title: string
@@ -23,7 +24,8 @@ export default function Pattern({
   title,
   mainImage,
   publishedAt,
-  images
+  images,
+  _rawDetails
 }: Props): ReactElement {
   console.log(_rawBody, mainImage, images)
 
@@ -41,7 +43,7 @@ export default function Pattern({
       </div>
       <div>
         <h2 style={{marginTop: 0}}>{title}</h2>
-        {_rawBody && <PortableText blocks={_rawBody} />}
+        {_rawDetails && <PortableText blocks={_rawDetails} />}
       </div>
       <div>{_rawBody && <PortableText blocks={_rawBody} />}</div>
     </article>
